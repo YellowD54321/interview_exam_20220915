@@ -1,0 +1,188 @@
+.home-page-main {
+    background-image: url('../../../public/images/background/底色.png');
+    color: white;
+    position: relative;
+    height: 100vh;
+    justify-content: flex-start;
+}
+
+.home-page-main::before {
+    content: " ";
+    position: absolute;
+    width: 150vw;
+    height: 100%;
+    background-image: url('../../../public/images/background/白色海浪.png');
+    background-size: cover;
+    top: 0;
+    left: -10vw;
+    z-index: -1;
+}
+
+.home-page-slogan {
+    font-size: 32px;
+    line-height: 125%;
+    letter-spacing: 0.3em;
+    margin: 0;
+    margin-top: 10vh;
+}
+
+.home-page-form-button {
+    background-color: var(--color-brown);
+    box-shadow: 0px 0px 20px rgba(250, 163, 163, 0.91);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    color: white;
+    font-size: 18px;
+    line-height: 125%;
+    letter-spacing: 0.3em;
+    padding: 16px 0px;
+    margin: 32px 0;
+    text-decoration: none;
+    transition-duration: 0.5s;
+}
+
+
+.home-page-form-button:hover {
+    transform: scale(1.1);
+}
+
+.home-page-paragraphs {
+    position: relative;
+    max-width: 50vw;
+    background-color: var(--color-background-light);
+    border: 2px var(--color-brown) solid;
+    border-radius: 20px;
+    color: var(--color-background-dark);
+    padding: 0 16px;
+}
+
+.home-page-boat-1-region {
+    position: absolute;
+    top: -30px;
+    right: 0;
+}
+
+.home-page-boat-1-main {
+    width: 70px;
+}
+
+.home-page-boat-1-paddle {
+    position: absolute;
+    width: 50px;
+    top: 15px;
+    left: 18px;
+    animation: paddle 3s ease-out infinite
+}
+
+@keyframes paddle {
+    0% {
+        transform: rotate(45deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+.home-page-boat-1-bubble1 {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    width: 20px;
+    animation: bubble1 5s ease-out infinite
+}
+
+@keyframes bubble1 {
+    0% {
+        width: 20px;
+        top: -20px;
+        left: 20px;
+    }
+    100% {
+        width: 0;
+        top: -40px;
+        left: 30px;
+    }
+}
+
+.home-page-boat-1-bubble2 {
+    position: absolute;
+    top: -30px;
+    left: 50px;
+    width: 15px;
+    animation: bubble2 6s linear infinite
+}
+
+@keyframes bubble2 {
+    0% {
+        width: 15px;
+        top: -30px;
+        left: 50px;
+    }
+    100% {
+        width: 0;
+        top: -50px;
+        left: 70px;
+    }
+}
+
+.home-page-boat-2-region {
+    position: absolute;
+    bottom: -60px;
+    left: 30px;
+}
+
+.home-page-boat-2-firework {
+    position: absolute;
+    bottom: 0;
+    left: -25px;
+    animation: firework 3s ease-out infinite
+}
+
+@keyframes firework {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.home-page-paragraph-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.home-page-image-waves {
+    background-image: url('../../../public/images/wave/wave.png');
+    background-position: 0 0;
+    background-size: auto 100%;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 3000vw;
+    height: 110px;
+    z-index: 2;
+    animation: wave 300s linear infinite
+}
+
+@keyframes wave {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -1000vw;
+    }
+}

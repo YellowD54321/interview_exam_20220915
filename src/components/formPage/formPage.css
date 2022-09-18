@@ -1,0 +1,194 @@
+.form-page-main {
+    position: relative;
+    height: 100vh;
+    background-color: var(--color-background-form);
+    padding: 20px 0;
+}
+
+.form-page-form-main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    min-width: 50vw;
+    padding: 20px;
+    padding-bottom: 40px;
+    margin-top: 50px;
+    border: 2px solid var(--color-brown);
+    border-radius: 16px;
+    box-shadow: 0px 2px 3px 0px;
+}
+
+.form-page-form-title {
+    --form-title-width: 100px;
+    --form-title-height: 30px;
+
+    position: absolute;
+    width: var(--form-title-width);
+    height: var(--form-title-height);
+    top: calc(-1 * var(--form-title-height) / 2);
+    left: calc(50% - var(--form-title-width) / 2);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    font-weight: bold;
+    color: var(--color-brown);
+    border: 2px solid var(--color-brown);
+    border-radius: 50px;
+}
+
+.form-page-form-turtle {
+    position: absolute;
+    top: -15px;
+    left: 70%;
+    width: 50px;
+    animation: turtle 5s linear infinite
+}
+
+@keyframes turtle {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.form-page-form-input-region {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    margin-top: 20px;
+}
+
+.form-page-form-input-title-region {
+    display: flex;
+    align-items: center;
+}
+
+.form-page-form-alert-information {
+    margin: 0;
+    margin-left: 10px;
+    color: red;
+}
+
+.form-page-form-label {
+    color: var(--color-blue-dark);
+}
+
+.form-page-form-label::after {
+    content: ' *';
+    color: red;
+}
+
+.form-page-form-input {
+    padding: 16px 16px;
+    border: var(--color-blue-dark) 1px solid;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    outline: none;
+}
+
+.form-page-form-input::placeholder {
+    color: var(--color-gray-light);
+}
+
+.form-page-form-input-arrow {
+    width: 35px;
+    position: absolute;
+    right: 12px;
+    top: 35px;
+}
+
+.form-page-form-store-list {
+    background-color: white;
+    color: black;
+    width: 100%;
+    list-style-type: none;
+    display: none;
+    position: absolute;
+    top: 60px;
+    padding: 0;
+    border: 1px solid var(--color-system-blue);
+    z-index: 3;
+}
+
+.form-page-form-input:focus + .form-page-form-store-list,
+.form-page-form-store-list:hover {
+    display: block;
+}
+
+.form-page-form-store-item {
+    padding-left: 20px;
+    cursor: default;
+}
+
+.form-page-form-store-item:hover {
+    background-color: var(--color-system-blue);
+    color: white;
+}
+
+select {
+    appearance:none;
+}
+
+.form-page-submit-button {
+    background-color: var(--color-brown);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    border: none;
+    width: 200px;
+    color: white;
+    font-size: 18px;
+    line-height: 125%;
+    letter-spacing: 0.3em;
+    padding: 16px 20px;
+    margin-top: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.5s;
+}
+
+.form-page-submit-button:active {
+    background-color: var(--color-brown-light);
+}
+
+.form-page-submit-button:hover {
+    transform: scale(1.1);
+}
+
+.form-page-submit-button > img {
+    margin-right: 20px;
+}
+
+.form-page-button-invalid {
+    cursor: not-allowed;
+}
+
+.form-page-server-response-information {
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.form-page-not-display {
+    display: none;
+}
+
+.form-page-server-response {
+    margin-top: 20px;
+}
+
+.form-page-server-response > p {
+    text-align: center;
+    margin: 0;
+}
