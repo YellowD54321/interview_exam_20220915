@@ -4,6 +4,7 @@
     position: relative;
     height: 100vh;
     justify-content: flex-start;
+    contain: paint;
 }
 
 .home-page-main::before {
@@ -23,7 +24,7 @@
     line-height: 125%;
     letter-spacing: 0.3em;
     margin: 0;
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 .home-page-form-button {
@@ -184,5 +185,46 @@
 
     100% {
         left: -1000vw;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    :root {
+        --image-wave-height: 80px;
+        --image-boat2-height: 50px;
+        --space-area: 20px;
+    }
+
+    .home-page-main {
+        height: auto;
+        padding-bottom: calc(var(--image-wave-height) + var(--image-boat2-height) + var(--space-area));
+    }
+
+    .home-page-boat-1-region {
+        top: -20px;
+        right: 0;
+    }
+    
+    .home-page-boat-1-main {
+        width: 50px;
+    }
+
+    .home-page-boat-1-paddle {
+        width: 40px;
+        top: 12px;
+        left: 10px;
+    }
+
+    .home-page-boat-2-region {
+        bottom: -40px;
+        left: 10px;
+    }
+
+    .home-page-boat-2-main {
+        height: var(--image-boat2-height);
+    }
+    
+    .home-page-image-waves {
+        height: var(--image-wave-height);
     }
 }

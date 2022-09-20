@@ -68,3 +68,25 @@
     font-weight: bold;
     color: var(--color-store-quality-green);
 }
+
+@media screen and (max-width: 767px) {
+    .store-page-store-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .store-page-store {
+        width: 150px;
+        height: 100px;
+    }
+
+    .store-page-store-levle {
+        font-size: small;
+        top: 12px;
+        padding: 3px 5px;
+    }
+    
+    .store-page-store-name {
+        top: 60px;
+        font-size: 15px;
+    }
+}

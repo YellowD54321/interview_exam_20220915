@@ -1,28 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./formPage.css";
 import { sotreData } from "../../storeData";
+import Submitbutton from "./submitButton/Submitbutton";
 
 const FormPage = () => {
   const DownArrowUrl = "./images/drop down.png";
   const RequiredText = "Required";
   const WrongFormatText = "Wrong Format";
-  const SubmitButtonText = {
-    Submit: "submit",
-    Success: "success",
-    Failure: "failure",
-  };
-  const SubmitButtonImageUrl = {
-    Submit: "",
-    Success: "./images/success.png",
-    Failure: "./images/failure.png",
-  };
-  const submitButtonRef = useRef(null);
   const serverResponseSuccessInputRef = useRef(null);
   const serverResponseInformationRef = useRef(null);
-  const [submitButton, setSubmitButton] = useState({
-    text: SubmitButtonText.Submit,
-    imageUrl: SubmitButtonImageUrl.Submit,
-  });
   const [storeInpurText, setStoreInputText] = useState("");
   const [alertInfomation, setAlertInfomation] = useState({
     store: null,
@@ -76,16 +62,20 @@ const FormPage = () => {
     return filteredStoreList;
   };
 
+  const showFormInvalidInformation = (field, newAlertInfomation) => {
+    setAlertInfomation((preValue) => {
+      return {
+        ...preValue,
+        [field]: newAlertInfomation,
+      };
+    });
+  };
+
   function handleStoreListClick(storeName) {
     const filteredStoreList = changeStoreList(storeName);
     setStoreInputText(storeName);
     setStoreList(filteredStoreList);
-    setAlertInfomation((preValue) => {
-      return {
-        ...preValue,
-        store: "",
-      };
-    });
+    showFormInvalidInformation("store", "");
   }
 
   const handleStoreInputChange = (event) => {
@@ -99,12 +89,7 @@ const FormPage = () => {
     }
     setStoreInputText(text);
     setStoreList(filteredStoreList);
-    setAlertInfomation((preValue) => {
-      return {
-        ...preValue,
-        store: newAlertInfomation,
-      };
-    });
+    showFormInvalidInformation("store", newAlertInfomation);
   };
 
   const handleNameInputChange = (event) => {
@@ -118,17 +103,12 @@ const FormPage = () => {
     } else {
       newAlertInfomation = "";
     }
-    setAlertInfomation((preValue) => {
-      return {
-        ...preValue,
-        name: newAlertInfomation,
-      };
-    });
+    showFormInvalidInformation("name", newAlertInfomation);
   };
 
   const handlePhoneInputChange = (event) => {
     const text = event.target.value;
-    const Reg = new RegExp(/^([09])+[0-9]+$/);
+    const Reg = new RegExp(/^0+9+[0-9]+$/);
     let newAlertInfomation = {};
     if (text === "") {
       newAlertInfomation = RequiredText;
@@ -137,12 +117,7 @@ const FormPage = () => {
     } else {
       newAlertInfomation = "";
     }
-    setAlertInfomation((preValue) => {
-      return {
-        ...preValue,
-        phone: newAlertInfomation,
-      };
-    });
+    showFormInvalidInformation("phone", newAlertInfomation);
   };
 
   const handleConsumptionInputChange = (event) => {
@@ -156,115 +131,8 @@ const FormPage = () => {
     } else {
       newAlertInfomation = "";
     }
-    setAlertInfomation((preValue) => {
-      return {
-        ...preValue,
-        consumption: newAlertInfomation,
-      };
-    });
+    showFormInvalidInformation("consumption", newAlertInfomation);
   };
-
-  const showFormInvalidInformation = (field, newAlertInfomation) => {
-    setAlertInfomation((preValue) => {
-      return {
-        ...preValue,
-        [field]: newAlertInfomation,
-      };
-    });
-  };
-
-  const isFormValid = () => {
-    let result = true;
-    Object.entries(alertInfomation).forEach(([field, value]) => {
-      if (value !== "") {
-        result = false;
-      }
-    });
-    return result;
-  };
-
-  const showAllormInvalidInformation = () => {
-    Object.entries(alertInfomation).forEach(([field, value]) => {
-      if (value !== "") {
-        showFormInvalidInformation(field, value ? value : RequiredText);
-      }
-    });
-  };
-
-  const canSubmitButton = () => {
-    if (!isFormValid()) return false;
-    if (submitButton.text !== SubmitButtonText.Submit) return false;
-    return true;
-  };
-
-  const setSubmitButtonInvalidClass = (invalid) => {
-    const InvalidClassName = "form-page-button-invalid";
-    if (!submitButtonRef.current) return;
-    if (invalid) {
-      submitButtonRef.current.classList.add(InvalidClassName);
-    } else {
-      submitButtonRef.current.classList.remove(InvalidClassName);
-    }
-  };
-
-  const setSubmitButtonText = (text) => {
-    const imageUrl =
-      SubmitButtonImageUrl[text.charAt(0).toUpperCase() + text.slice(1)];
-    setSubmitButton({
-      text: text,
-      imageUrl: imageUrl,
-    });
-  };
-
-  const setSubmitButtonState = (text) => {
-    setSubmitButtonText(text);
-    switch (text) {
-      case SubmitButtonText.Submit:
-        setSubmitButtonInvalidClass(false);
-        setServerResponseInformation(false);
-        break;
-      case SubmitButtonText.Success:
-        setSubmitButtonInvalidClass(true);
-        setServerResponseInformation(false);
-        break;
-      case SubmitButtonText.Failure:
-        setSubmitButtonInvalidClass(true);
-        setServerResponseInformation(true);
-        break;
-      default:
-        setSubmitButtonInvalidClass(false);
-        setServerResponseInformation(false);
-        break;
-    }
-  };
-
-  const setServerResponseInformation = (display) => {
-    const NotDisplayClassName = "form-page-not-display";
-    const serverResponseInformation = serverResponseInformationRef.current;
-    if (display) {
-      serverResponseInformation.classList.remove(NotDisplayClassName);
-    } else {
-      serverResponseInformation.classList.add(NotDisplayClassName);
-    }
-  };
-
-  const handleSubmitButtonClick = () => {
-    if (!canSubmitButton()) {
-      showAllormInvalidInformation();
-      return;
-    }
-    const isServerResponseSuccess =
-      serverResponseSuccessInputRef.current.checked;
-    if (isServerResponseSuccess) {
-      setSubmitButtonState(SubmitButtonText.Success);
-    } else {
-      setSubmitButtonState(SubmitButtonText.Failure);
-    }
-  };
-
-  useEffect(() => {
-    setSubmitButtonState(SubmitButtonText.Submit);
-  }, [alertInfomation]);
 
   return (
     <div className="main-page form-page-main" id="form-page-form">
@@ -379,19 +247,13 @@ const FormPage = () => {
           />
         </div>
       </form>
-      <button
-        type="submit"
-        className="form-page-submit-button form-page-button-invalid"
-        ref={submitButtonRef}
-        onClick={handleSubmitButtonClick}
-      >
-        <img
-          src={submitButton.imageUrl}
-          alt=""
-          className="form-page-submit-image"
-        />
-        {submitButton.text}
-      </button>
+      <Submitbutton
+        RequiredText={RequiredText}
+        alertInfomation={alertInfomation}
+        showFormInvalidInformation={showFormInvalidInformation}
+        serverResponseInformationRef={serverResponseInformationRef}
+        serverResponseSuccessInputRef={serverResponseSuccessInputRef}
+      />
       <p
         className="form-page-server-response-information form-page-not-display"
         ref={serverResponseInformationRef}

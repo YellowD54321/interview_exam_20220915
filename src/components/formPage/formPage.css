@@ -1,6 +1,5 @@
 .form-page-main {
     position: relative;
-    height: 100vh;
     background-color: var(--color-background-form);
     padding: 20px 0;
 }
